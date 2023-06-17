@@ -15,6 +15,15 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    - name: Cache
+      uses: actions/cache@v2
+      with:
+        path: |
+          ~/.cargo/bin
+          ~/.cargo/registry
+          ~/.cargo/git
+          target
+        key: ${{ runner.os }}-cargo-${{ hashFiles('Cargo.toml') }}
     - name: Install tree-sitter-cli
       run: cargo install tree-sitter-cli
     - name: Compile parser
