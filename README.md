@@ -4,8 +4,11 @@
   <a href="#" target="_blank">
     <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" />
   </a>
-  <a href="#">
+  <a href="https://github.com/adamazing">
     <img alt="Github: adamazing" src="https://img.shields.io/github/followers/adamazing?label=Followers&cacheSeconds=2592000" />
+  </a>
+  <a href="">
+    <img alt="Github build status" src="https://img.shields.io/github/actions/workflow/status/adamazing/tree-sitter-liquid/test.yml" />
   </a>
 </p>
 
