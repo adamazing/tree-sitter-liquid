@@ -1,0 +1,50 @@
+======================
+String literal
+======================
+
+{{ 'Hello' }}
+
+---
+
+(template
+  (output_directive
+    (code)))
+
+======================
+Number literal
+======================
+
+{{ 10 }}
+
+---
+
+(template
+  (output_directive
+    (code)))
+
+======================
+Boolean literal
+======================
+
+{{ true }}
+
+---
+
+(template
+  (output_directive
+    (code)))
+
+======================
+Identifier
+======================
+
+{{ page.title }}
+
+---
+
+(template
+  (output_directive
+    (code)))
+
+
+

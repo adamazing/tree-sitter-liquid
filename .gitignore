@@ -1,0 +1,31 @@
+# We are using this .gitignore file to default to blocking everything and explicitly allowing things we want.
+*
+!*/
+
+node_modules
+
+# Allow tracking of .gitignore
+!.gitignore
+
+# Grammar description file
+!grammar.js
+
+# Track packaging files
+!package*.json
+!Cargo.toml
+
+# Track the project readme and software license
+!README.md
+!LICENSE
+
+# Track test files
+!test/**/*
+
+# Track the generated bindings directory
+!bindings/**
+
+# Track the binding.gyp file
+!binding.gyp
+
+# Track the generated tree-sitter source files
+!src/**
