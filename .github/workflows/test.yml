@@ -26,7 +26,8 @@ jobs:
           target/
         key: v2-${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
     - name: Install tree-sitter-cli
-      run: cargo install tree-sitter-cli
+      run: |
+        cargo install tree-sitter-cli
     - name: Compile parser
       run: tree-sitter generate
     - name: Run tests
