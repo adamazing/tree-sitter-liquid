@@ -1,0 +1,23 @@
+name: Test
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Install tree-sitter-cli
+      run: cargo install tree-sitter-cli
+    - name: Compile parser
+      run: tree-sitter generate
+    - name: Run tests
+      run: tree-sitter test
