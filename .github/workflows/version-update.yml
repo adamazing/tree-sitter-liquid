@@ -1,0 +1,60 @@
+name: Update version
+
+on:
+  pull_request:
+    branches: [ "main" ]
+  types:
+    - opened
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout required files
+        uses: actions/checkout@v3
+        with:
+          sparse_checkout: |
+            /VERSION
+            /package.json
+            /Cargo.toml
+
+      - name: Check for VERSION file changes
+        id: version_changes
+        run: |
+          changes=$(git diff --name-only ${{ github.event.pull_request.base.sha }} -- VERSION)
+          if [[ -n $changes ]]; then
+            echo "::set-output name=needs_update::true"
+          else
+            echo "::set-output name=needs_update::false"
+          fi
+
+      - name: Update version
+        run: |
+          if [[ "${{ steps.version_changes.outputs.needs_update }}" == "true" ]]; then
+            # Read Semver version from VERSION file
+            VERSION=$(<VERSION)
+
+            # Update version in package.json
+            sed -i 's/"version": ".*"/"version": "'"$VERSION"'"/' package.json
+
+            # Update version in Cargo.toml
+            sed -i 's/version = ".*"/version = "'"$VERSION"'"/' Cargo.toml
+          else
+            echo "Skipping version update. No changes in VERSION file."
+          fi
+
+      - name: Commit version update
+        run: |
+          if [[ "${{ steps.version_changes.outputs.needs_update }}" == "true" ]]; then
+            git config --global user.name "GitHub Actions"
+            git config --global user.email "actions@github.com"
+            git add package.json Cargo.toml
+            git commit -m "Update version in package.json and Cargo.toml" || echo "No changes to commit"
+          else
+            echo "Skipping commit step. No version update to commit."
+          fi
+

@@ -7,6 +7,9 @@ node_modules
 # Allow tracking of .gitignore
 !.gitignore
 
+# Allow tracking of .github workflows configuration
+!.github/**
+
 # Grammar description file
 !grammar.js
 
@@ -29,3 +32,6 @@ node_modules
 
 # Track the generated tree-sitter source files
 !src/**
+
+# Track the VERSION file
+!VERSION
