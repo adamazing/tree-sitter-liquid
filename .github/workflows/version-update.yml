@@ -15,7 +15,7 @@ jobs:
       - name: Checkout required files
         uses: actions/checkout@v3
         with:
-          sparse_checkout: |
+          sparse-checkout: |
             /VERSION
             /package.json
             /Cargo.toml
