@@ -16,9 +16,9 @@ jobs:
         uses: actions/checkout@v3
         with:
           sparse-checkout: |
-            /VERSION
-            /package.json
-            /Cargo.toml
+            VERSION
+            package.json
+            Cargo.toml
 
       - name: Check for VERSION file changes
         id: version_changes
