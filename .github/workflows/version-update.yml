@@ -47,11 +47,11 @@ jobs:
       - name: Commit version update
         run: |
           if [[ "${{ steps.version_changes.outputs.needs_update }}" == "true" ]]; then
-            git config --global user.name "GitHub Actions Bot"
-            git config --global user.email ""
+            git config --global user.name "github-actions"
+            git config --global user.email "github-actions@github.com"
             git add package.json Cargo.toml
             git commit -m "Update version in package.json and Cargo.toml"
-            git push origin main
+            git push
           else
             echo "Skipping commit step. No version update to commit."
           fi
