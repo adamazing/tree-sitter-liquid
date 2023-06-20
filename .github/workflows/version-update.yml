@@ -17,40 +17,23 @@ jobs:
     steps:
       - name: Checkout required files
         uses: actions/checkout@v3
-      - name: Check for VERSION file changes
-        id: version_changes
-        run: |
-          changes=$(git diff --name-only ${{ github.event.pull_request.base.sha }} -- VERSION)
-          if [[ -n $changes ]]; then
-            echo "needs_update=true" >> $GITHUB_OUTPUT
-          else
-            echo "needs_update=false" >> $GITHUB_OUTPUT
-          fi
 
       - name: Update version
         run: |
-          if [[ "${{ steps.version_changes.outputs.needs_update }}" == "true" ]]; then
-            # Read Semver version from VERSION file
-            VERSION=$(<VERSION)
+          # Read Semver version from VERSION file
+          VERSION=$(<VERSION)
 
-            # Update version in package.json
-            sed -i 's/"version": ".*"/"version": "'"$VERSION"'"/' package.json
+          # Update version in package.json
+          sed -i 's/"version": ".*"/"version": "'"$VERSION"'"/' package.json
 
-            # Update version in Cargo.toml
-            sed -i 's/version = ".*"/version = "'"$VERSION"'"/' Cargo.toml
-          else
-            echo "Skipping version update. No changes in VERSION file."
-          fi
+          # Update version in Cargo.toml
+          sed -i 's/version = ".*"/version = "'"$VERSION"'"/' Cargo.toml
 
       - name: Commit version update
         run: |
-          if [[ "${{ steps.version_changes.outputs.needs_update }}" == "true" ]]; then
-            git config --global user.name "github-actions"
-            git config --global user.email "github-actions@github.com"
-            git add package.json Cargo.toml
-            git commit -m "Update version in package.json and Cargo.toml"
-            git push
-          else
-            echo "Skipping commit step. No version update to commit."
-          fi
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git add package.json Cargo.toml
+          git commit -m "Update version in package.json and Cargo.toml" || echo "No version bump needed."
+          git push || echo "No changes to be pushed."
 
