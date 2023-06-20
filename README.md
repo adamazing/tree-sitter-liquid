@@ -15,10 +15,21 @@
 ## Intro
 This is a from-scratch implementation of a tree-sitter parser for the Liquid templating language.
 
+## Goals
+🏆 A comprehensive description of Liquid grammar
+🏆 Tests for all language rules
+🏆 Tests for all code snippets in Shopify Liquid/Jekyll Liquid docs
+🏆 Highlight queries
+🏆 Tests for highlighting queries
+🏆 Fold queries
+🏆 Injection (and therefore highlighting) of HTML
+🏆 Indent queries
+🏆 Locals queries (and highlights)
+
 
 ## Resources
 
-[Tree-sitter](https://github.com/tree-sitter/tree-sitter), and its amazing [documentation](https://tree-sitter.github.io/tree-sitter/).
+[Tree-sitter](https://github.com/tree-sitter/tree-sitter), and its amazing grammar parsing [documentation](https://tree-sitter.github.io/tree-sitter/).
 
 [Shopify's](https://shopify.github.io/) Liquid templating language [documentation](https://shopify.github.io/liquid/basics/introduction/).
 
