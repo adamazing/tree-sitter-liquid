@@ -1,6 +1,6 @@
 {
   "name": "tree-sitter-liquid",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "Liquid template parser for treesitter",
   "main": "bindings/node",
   "scripts": {
