@@ -2,7 +2,6 @@ name: Update version
 
 on:
   push:
-    branches: [ "main" ]
     paths: [ "VERSION" ]
 
 env:
