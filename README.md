@@ -1,16 +1,12 @@
 <h1 align="center">tree-sitter-liquid 🌴🪑💧</h1>
 <p align="center">
   <!-- <img alt="Version" src="https://img.shields.io/badge/version-0.0.1-blue.svg?label=Version&cacheSeconds=2592000" /> -->
-  <a href="#">
-    <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" />
-  </a>
-  <a href="https://github.com/adamazing">
-    <img alt="Github: adamazing" src="https://img.shields.io/github/followers/adamazing?label=Followers&cacheSeconds=2592000" />
-  </a>
-  <a href="https://github.com/adamazing/tree-sitter-liquid/actions/workflows/test.yml">
+  <a href="https://github.com/adamazing"><img alt="Github: adamazing" src="https://img.shields.io/github/followers/adamazing?label=Followers&cacheSeconds=2592000" /></a>
+  <a href="actions/workflows/test.yml">
     <img alt="Github build status" src="https://img.shields.io/github/actions/workflow/status/adamazing/tree-sitter-liquid/test.yml" />
   </a>
 </p>
+[![License](https://img.shields.io/github/license/adamazing/tree-sitter-liquid "MIT")](LICENSE)
 
 ## Intro
 This is a from-scratch implementation of a tree-sitter parser for the Liquid templating language.
