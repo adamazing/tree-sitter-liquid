@@ -8,4 +8,14 @@ updates:
   - package-ecosystem: "cargo" # See documentation for possible values
     directory: "/" # Location of package manifests
     schedule:
+      day: "saturday"
       interval: "weekly"
+      time: "08:00"
+      timezone: "Pacific/Auckland"
+  - package-ecosystem: "npm" # See documentation for possible values
+    directory: "/" # Location of package manifests
+    schedule:
+      day: "saturday"
+      interval: "weekly"
+      time: "08:00"
+      timezone: "Pacific/Auckland"
