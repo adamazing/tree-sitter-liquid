@@ -17,7 +17,8 @@ jobs:
     steps:
       - name: Checkout required files
         uses: actions/checkout@v3
-
+        with:
+          fetch-depth: 0
       - name: Check for VERSION file changes
         id: version_changes
         run: |
