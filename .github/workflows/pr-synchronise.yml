@@ -1,0 +1,84 @@
+name: PR Synchronised
+
+on:
+  pull_request:
+    types: [ "synchronize" ]
+    branches: [ "main" ]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  run-tree-sitter-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Cache
+      uses: actions/cache@v3
+      with:
+        path: |
+          ~/.cargo/bin/
+          ~/.cargo/registry/index/
+          ~/.cargo/registry/cache/
+          ~/.cargo/git/db/
+          target/
+        key: v3-${{ runner.os }}-cargo-${{ hashFiles('Cargo.lock') }}
+
+    - name: Install tree-sitter-cli
+      run: |
+        if ! command -v tree-sitter > /dev/null; then
+          cargo install tree-sitter-cli
+        fi
+
+    - name: Compile parser
+      run: tree-sitter generate
+
+    - name: Run tests
+      run: tree-sitter test
+
+  version-checks:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+
+      - name: Check for change to VERSION file
+        run: |
+          if git diff --quiet origin/main -- VERSION; then
+            return 1
+          fi
+
+  bindings-config-versions-bump:
+    needs: version-checks
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout required files
+        uses: actions/checkout@v3
+
+      - name: Update version
+        id: update_version
+        run: |
+          # Read Semver version from VERSION file
+          VERSION=$(<VERSION)
+          # Update version in package.json
+          sed -i 's/"version": ".*"/"version": "'"$VERSION"'"/' package.json
+          # Update version in Cargo.toml
+          sed -i 's/version = ".*"/version = "'"$VERSION"'"/' Cargo.toml
+
+      - name: Commit version update
+        run: |
+          VERSION=$(<VERSION)
+
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add package.json Cargo.toml
+          git commit -m "Update version in package.json and Cargo.toml to $VERSION" || echo "No version bump needed."
+          git push || echo "No changes to be pushed."
+

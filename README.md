@@ -1,8 +1,8 @@
-<h1 align="center">tree-sitter-liquid 🌴🪑💧</h1>
+<h1 align="center">tree-sitter-liquid🌴🪑💧</h1>
 <div align="center">
 
 [![License](https://img.shields.io/github/license/adamazing/tree-sitter-liquid?label=License)](LICENSE "MIT")
-[![Latest release)](https://img.shields.io/github/v/tag/adamazing/tree-sitter-liquid?logo=SemVer&label=Release)](releases)
+[![Latest release)](https://img.shields.io/github/v/tag/adamazing/tree-sitter-liquid?logo=SemVer&include_prereleases&label=Release)](releases)
 [![Main branch test status](https://img.shields.io/github/actions/workflow/status/adamazing/tree-sitter-liquid/test.yml?event=push&logo=githubactions&logoColor=rgb(255%2C255%2C255)&label=Build)](actions/workflows/test.yml?query=event%3Apush)
 
 </div>
