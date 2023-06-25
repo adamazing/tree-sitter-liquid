@@ -82,5 +82,5 @@ jobs:
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add package.json Cargo.toml
           git commit -m "Update version in package.json and Cargo.toml to $VERSION" || echo "No version bump needed."
-          git push || echo "No changes to be pushed."
+          git push origin HEAD:${{ github.ref }} || echo "No changes to be pushed."
 
