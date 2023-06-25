@@ -47,7 +47,7 @@ jobs:
 
       - name: Check for change to VERSION file
         run: |
-          if git diff --quiet origin/main -- VERSION; then
+          if ! git diff --quiet origin/main -- VERSION; then
             return 1
           fi
 
