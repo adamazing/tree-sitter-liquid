@@ -8,7 +8,8 @@ String literal
 
 (template
   (output_directive
-    (code)))
+    (code
+      (string))))
 
 ======================
 Number literal
@@ -20,7 +21,8 @@ Number literal
 
 (template
   (output_directive
-    (code)))
+    (code
+      (number))))
 
 ======================
 Boolean literal
@@ -32,19 +34,35 @@ Boolean literal
 
 (template
   (output_directive
-    (code)))
+    (code
+      (boolean))))
 
 ======================
-Identifier
+Identifier with fields
 ======================
 
-{{ page.title }}
+{{ page.section.title }}
 
 ---
 
 (template
   (output_directive
-    (code)))
+    (code
+      (selector_expression
+        operand: (identifier)
+        field: (identifier)
+        field: (identifier)))))
 
+======================
+Identifier
+======================
 
+{{ page }}
+
+---
+
+(template
+  (output_directive
+    (code
+      (identifier))))
 

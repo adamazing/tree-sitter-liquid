@@ -13,8 +13,11 @@ node_modules
 # Grammar description file
 !grammar.js
 
+# Track the queries directory
+!queries/**
+
 # Track packaging files
-!package*.json
+!package.json
 !Cargo.toml
 
 # Track the project readme and software license

@@ -1,0 +1,28 @@
+========================
+Include tag (deprecated)
+========================
+
+{% include 'hello.liquid' %}
+
+---
+
+(template
+  (directive
+    (code
+      (include_expression
+        included_file: (string)))))
+
+========================
+Render tag
+========================
+
+{% render 'hello.liquid' %}
+
+---
+
+(template
+  (directive
+    (code
+      (render_expression
+        rendered_file: (string)))))
+
