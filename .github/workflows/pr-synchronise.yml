@@ -85,6 +85,13 @@ jobs:
           git_config_global: true
           git_user_signingkey: true
           git_commit_gpgsign: true
+      - name: Debugging info
+        run: |
+          gpg -K
+          echo "${{ github.event.pull_request.head.ref }}"
+          echo "${{ steps.import-gpg.outputs.fingerprint }}"
+          echo "${{ steps.import-gpg.outputs.keyid }}"
+
       - name: Commit version update
         env:
           GITHUB_TOKEN: ${{ secrets.ADAMBOT_GITHUB_TOKEN }}
@@ -95,7 +102,8 @@ jobs:
         run: |
           VERSION=$(<VERSION)
 
+          git remote set-url origin "https://x-access-token:$GITHUB_TOKEN@github.com/${{github.repository}}"
           git add package.json Cargo.toml
-          git commit -m "Update version in package.json and Cargo.toml to $VERSION" || echo "No version bump needed."
+          git commit -S -m "Update version in package.json and Cargo.toml to $VERSION" || echo "No version bump needed."
           git push origin HEAD:${{ github.event.pull_request.head.ref }} || echo "No changes to be pushed."
 
