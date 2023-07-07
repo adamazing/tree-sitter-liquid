@@ -1,6 +1,8 @@
 module.exports = grammar({
   name: 'liquid',
 
+  word: $ => $.identifier,
+
   rules: {
     template: $ => repeat(
       choice(
@@ -21,8 +23,18 @@ module.exports = grammar({
       choice("}}", "-}}")
     ),
 
+    comment: $ => token(choice(
+      seq("{%", /\s#/, /[^%-]+/,),
+    )),
+
     code: $ => repeat1(
-      choice(/[^%}-]+|[%}-]/)
+      choice(
+        $._expression
+      )
+    ),
+
+    control_code: $ => choice(
+      ""
     ),
 
     _literal: $ => choice($.string, $.number, $.boolean),
@@ -33,30 +45,62 @@ module.exports = grammar({
     ),
 
     number: $ => choice(
-      /\d+/, // TODO: Check if this is correct
+      /-?\d*\.?\d+/,
     ),
 
     boolean: $ => choice('true', 'false'),
 
     _expression: $ => choice(
       $.identifier,
-      $._literal,
+      $.include_expression,
+      $.render_expression,
+      $.selector_expression,
       $.binary_expression,
+      $._literal
       //TODO: add more expression types
     ),
 
+    selector_expression: $ => choice(
+      prec(1, seq(
+        field('operand', $.identifier),
+        repeat1(
+          seq(
+            '.',
+            field('field', $.identifier)
+          )
+        )
+      )
+    )),
+
     identifier: $ => /[a-zA-Z_][a-zA-Z0-9]+/,
 
+    binary_operator: $ => choice(
+      "==",
+      "!=",
+      ">",
+      "<",
+      ">=",
+      "<=",
+      "or",
+      "and",
+    ),
+
+    // special case binary operator
+    contains_operator: $ => "contains",
+
+    include_expression: $ => seq(
+      field('include', "include"),
+      field('included_file',$.string)
+    ),
+
+    render_expression: $ => seq(
+      field('render', "render"),
+      field('rendered_file', $.string)
+    ),
+
     binary_expression: $ => choice(
-      seq($._expression, "==", $._expression),
-      seq($._expression, "!=", $._expression),
-      seq($._expression, ">", $._expression),
-      seq($._expression, "<", $._expression),
-      seq($._expression, ">=", $._expression),
-      seq($._expression, "<=", $._expression),
-      seq($._expression, "or", $._expression),
-      seq($._expression, "and", $._expression),
-      seq($._expression, "contains", $.string)
+      prec.right(1,seq($._expression, $.binary_operator, $._expression)),
+      prec.right(1,seq($._expression, $.contains_operator, $.string))
     )
   }
 });
