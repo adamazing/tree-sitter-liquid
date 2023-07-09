@@ -29,4 +29,8 @@ This is a from-scratch implementation of a tree-sitter parser for the Liquid tem
 
 ## Support
 
-If you've found this useful, please star the repository and consider sponsoring me, for any amount, to help support the open source ecosystem.
+If you've found this useful, please consider:  
+    🌟 starring the repo  
+    💲 [sponsoring](https://github.com/sponsors/adamazing) me  
+    ⚧️  supporting [OutLine](https://outline.org.nz/donate)  
+    ✍️ following me on [Medium](https://medium.com/@adamhenley)
