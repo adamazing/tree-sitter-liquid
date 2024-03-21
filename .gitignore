@@ -16,6 +16,9 @@ node_modules
 # Track the queries directory
 !queries/**
 
+# Track the examples directory
+# !examples/**
+
 # Track packaging files
 !package.json
 !Cargo.toml
