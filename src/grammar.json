@@ -208,13 +208,8 @@
       ]
     },
     "number": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "PATTERN",
-          "value": "-?\\d*\\.?\\d+"
-        }
-      ]
+      "type": "PATTERN",
+      "value": "-?\\d*\\.?\\d+"
     },
     "boolean": {
       "type": "CHOICE",

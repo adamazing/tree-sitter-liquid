@@ -44,9 +44,7 @@ module.exports = grammar({
       seq('"', /[^"]*/, '"')
     ),
 
-    number: $ => choice(
-      /-?\d*\.?\d+/,
-    ),
+    number: $ => /-?\d*\.?\d+/,
 
     boolean: $ => choice('true', 'false'),
 
