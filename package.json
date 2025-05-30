@@ -13,7 +13,7 @@
   "author": "Adam Henley <adamazing@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "nan": "^2.18.0"
+    "nan": "^2.22.2"
   },
   "devDependencies": {
     "tree-sitter-cli": "^0.20.8"
